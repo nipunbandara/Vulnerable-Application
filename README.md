@@ -1,4 +1,6 @@
 # MERN-basic
-<t6>BACKEND</t6>
-1.connect mongoose db<br>
+<t4>BACKEND</t5><br>
+<p>
+1.connect mongoose db
 2.add employee to the database
+</p>
