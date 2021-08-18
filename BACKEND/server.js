@@ -6,6 +6,7 @@ const dotnev = require('dotenv');
 const app = express();
 require("dotenv").config();
 
+//assign port value or 8070 to PORT
 const PORT = process.env.PORT || 8070;
 
 app.use(cors());
@@ -25,7 +26,16 @@ connection.once('open', () => {
     console.log('Mongodb Connection successful!');
 })
 
+
+const employeeRouter = require(routes/employees.js);
+
+//this works when localhost url "/employee" page is called
+//runs employees.js in route
+app.use("/employee", employeeRouter);
+
 app.listen(PORT, () => {
     console.log(`Server is up and running on port : ${PORT}`);
 })
 
+//nodemon is assigned in package.json
+//
