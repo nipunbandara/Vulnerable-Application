@@ -1,9 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const cors = require(require);
+const cors = require('cors');
 const dotnev = require('dotenv');
 const app = express();
+require("dotenv").config();
 
 const PORT = process.env.PORT || 8070;
 
@@ -25,6 +26,6 @@ connection.once('open', () => {
 })
 
 app.listen(PORT, () => {
-    console.log('Server is up and running on port : 8070');
+    console.log(`Server is up and running on port : ${PORT}`);
 })
 
