@@ -56,7 +56,7 @@ router.route("/update/:id").put(async (req, res) => {
     //findOne is to used find object by other than id(pk)
 
     .then(() => {
-        res.status(200).send({status: "user udpated", user : update}); // to send that update is successful. 200 - success code
+        res.status(200).send({status: "user udpated"}); // to send that update is successful. 200 - success code
 
     })
 
@@ -96,14 +96,14 @@ router.route("/get/:id").get(async (req, res) => {
     
     //making user object to assign userdetail to send to front end
     const user = await Employee.findById(userId)
-    .then(() => {
-        res.status(200).send({status : "user fetched", user : user}); //user is the object send here to pass user details
+    .then((employee) => {
+        res.status(200).send({status : "user fetched", employee}); //user is the object send here to pass user details
 
     })
 
     .catch((err) => {
         console.log(err.message);
-        res.status(500).send({status : "error with fetching user", error : error.message});
+        res.status(500).send({status : "error with fetching user", error : err.message});
 
     })
 })

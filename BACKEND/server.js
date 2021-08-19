@@ -27,7 +27,7 @@ connection.once('open', () => {
 })
 
 
-const employeeRouter = require(routes/employees.js);
+const employeeRouter = require("./routes/employees.js");
 
 //this works when localhost url "/employee" page is called
 //runs employees.js in route
