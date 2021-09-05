@@ -1,24 +1,29 @@
-import logo from './logo.svg';
+
 import './App.css';
+import AddEmployee from './components/AddEmployee';
+import CounterClass from './components/CounterClass';
+import CounterFunction from './components/CounterFunction';
+import Header from './components/Header';
+import {BrowserRouter as Router, Route} from 'react-router-dom'
+import AllEmployees from './components/AllEmployees';
+import UpdateEmployee from './components/UpdateEmployee';
+import EmployeeDetails from './components/EmployeeDetails';
+
 
 function App() {
   return (
+    <Router>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header/>
+
+     
+      <Route path = "/add" exact component = {AddEmployee} />
+      <Route path = "/update/:id" exact component = {UpdateEmployee} />
+      <Route path = "/" exact component = {AllEmployees} />
+      <Route path = "/:id" component = {EmployeeDetails}/>
+     
     </div>
+    </Router>
   );
 }
 
