@@ -10,6 +10,6 @@
 </p>
 <t4>FRONTEND-function-based</t5><br>
 <p>
-  Functionalaties for above mentioned are implemented from frontend
+  Functionalaties for above mentioned are implemented from frontend<br>
   extra: search function also added
 </p>
