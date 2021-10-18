@@ -8,7 +8,8 @@
   4.Delete employee<br>
   5.Fetch one employee<br>
 </p>
-<t4>FRONTEND</t5><br>
+<t4>FRONTEND-function-based</t5><br>
 <p>
-  
+  Functionalaties for above mentioned are implemented from frontend
+  extra: search function also added
 </p>
