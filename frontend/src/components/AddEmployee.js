@@ -35,11 +35,11 @@ export default function AddEmployee(){
     
     return(
 
-        <div className = "container">
+        <div className = "container" style={{ color: 'blue', lineHeight : 10, padding: 20 }}>
         <form onSubmit = {sendData}>
             <div className="form-group">
                 <label for="name">Name</label>
-                <input type="text" className="form-control" id="name" placeholder="Enter name" onChange = {(e) => {
+                <input type="text" className="form-control" id="name" placeholder="Enter name" pattern="^([a-zA-Z0-9])(([\-.]|[_]+)?([a-zA-Z0-9]+))*(@){1}[a-z0-9]+[.]{1}(([a-z]{2,3})|([a-z]{2,3}[.]{1}[a-z]{2,3}))$" onChange = {(e) => {
                     setName(e.target.value); //assigning filled value on input field to state variable name
                 }}/>
                 
