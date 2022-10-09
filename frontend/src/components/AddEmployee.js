@@ -18,7 +18,12 @@ export default function AddEmployee(){
             gender
         }
        
-        axios.post('http://localhost:8070/employee/add', newEmployee)
+        const pattern = new RegExp(name, "gi");
+        const result = pattern.test(gender);
+
+        if(result) {
+            console.log('The strings are similar.');
+            axios.post('http://localhost:8070/employee/add', newEmployee)
         .then(()=>{
             alert('Employee Added');
 
@@ -30,6 +35,9 @@ export default function AddEmployee(){
             alert(err);
         });
 
+        } else {
+            console.log('The strings are not similar.');
+        }
         //can use this on button as onClick or on form as onSubmit
     }
     
@@ -39,7 +47,7 @@ export default function AddEmployee(){
         <form onSubmit = {sendData}>
             <div className="form-group">
                 <label for="name">Name</label>
-                <input type="text" className="form-control" id="name" placeholder="Enter name" pattern="^([a-zA-Z0-9])(([\-.]|[_]+)?([a-zA-Z0-9]+))*(@){1}[a-z0-9]+[.]{1}(([a-z]{2,3})|([a-z]{2,3}[.]{1}[a-z]{2,3}))$" onChange = {(e) => {
+                <input type="text" className="form-control" id="name" placeholder="Enter name" onChange = {(e) => {
                     setName(e.target.value); //assigning filled value on input field to state variable name
                 }}/>
                 
