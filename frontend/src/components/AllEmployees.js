@@ -11,7 +11,7 @@ export default function AllEmployees(){
         function getEmployees(){
             axios.get('http://localhost:8070/employee/') //json.token is used as middleware when user login and authenticate json file. it is used as 2nd parameter in axios
             .then((res)=>{
-                console.log(res.data.existingEmployees);
+                //console.log(res.data.existingEmployees);
                 setEmployees(res.data.existingEmployees);
 
             }).catch((err) => {
@@ -23,45 +23,50 @@ export default function AllEmployees(){
 
     function filterData(employees, searchkey){
         const result = employees.filter((employee) =>
-        employee.name.toLowerCase().includes(searchkey)
+            employee.name.toLowerCase().includes(searchkey)
         );
-        setEmployees({employees:result});
+        //console.log(result);
+        setEmployees(result);
     }
     
     function handleSearchArea(e){
-    //     const searchkey = e.currentTarget.value;
-    //     axios.get("http://localhost:8070/employee/").then(res => {
-    //         if(res.data.success){
-    //             filterData(res.data.existingEmployees, searchkey)
-    //         }
-    // });
-    const searchValue = document.getElementById('search').value;
-    const message = document.getElementById('message');
-    message.innerHTML = 'You searched for: ' + searchValue;
+   
+        const searchValue = document.getElementById('search').value;
+        const message = document.getElementById('message');
+        message.innerHTML = 'You searched for: ' + searchValue;
+
+        const searchkey = searchValue;
+        axios.get("http://localhost:8070/employee/").then(res => {
+            if(res.data.success){
+                filterData(res.data.existingEmployees, searchkey)
+            }
+        });
     }
     
 
     return (
         <div>
-            <br/>
-        <input className="form-control mr-sm-2" id = "search" type="search" placeholder="Search" aria-label="Search" style={{width : 500, margin : 50}}></input>
-        <button className="btn btn-outline-success my-2 my-sm-0" type="submit" onClick = {handleSearchArea}>Search</button>
-        <h1 id = "message"></h1>
-        <table className="table table-hover table-bordered" style={{marginBlock : 50}}>
-            <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Age</th>
-                </tr>
-            </thead>
-            <tbody>
-            {employees.map(emp => (
-                <tr key = {emp._id}>
-                    <td>{emp.name}</td>
-                    <td>{emp.age}</td>
-                </tr>
-            ))}
-            </tbody>
+            <div className="row g-3" style={{marginTop : 50}}>
+                <input className="form-control" id = "search" type="search" placeholder="Search" aria-label="Search" style={{width : 500, marginInline : 200}}></input>
+                <button className="btn btn-outline-success my-2 my-sm-0 mb-3" type="submit" onClick = {handleSearchArea}>Search</button>
+            </div>
+            <br/>        
+            <h1 id = "message"></h1>
+            <table className="table table-hover table-bordered" style={{marginBlock : 50}}>
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Age</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {employees.map(emp => (
+                    <tr key = {emp._id}>
+                        <td>{emp.name}</td>
+                        <td>{emp.age}</td>
+                    </tr>
+                ))}
+                </tbody>
             </table>
 
         </div>
