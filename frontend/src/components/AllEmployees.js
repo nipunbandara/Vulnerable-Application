@@ -33,7 +33,7 @@ export default function AllEmployees(){
    
         const searchValue = document.getElementById('search').value;
         const message = document.getElementById('message');
-        message.innerHTML = 'You searched for: ' + searchValue;
+        message.innerText = 'You searched for: ' + searchValue;
 
         const searchkey = searchValue;
         axios.get("http://localhost:8070/employee/").then(res => {
