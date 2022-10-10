@@ -5,6 +5,7 @@ import axios from 'axios';
 export default function AllEmployees(){
 
     const [employees, setEmployees] = useState([]);
+    const [search, setSearch] = useState("");
 
     useEffect(() => {
         //where and how data is received
@@ -28,17 +29,17 @@ export default function AllEmployees(){
         //console.log(result);
         setEmployees(result);
     }
-    
+    function handleChange(e){
+        const searchkey = e.currentTarget.value;
+        setSearch(searchkey);
+    }
     function handleSearchArea(e){
    
-        const searchValue = document.getElementById('search').value;
-        const message = document.getElementById('message');
-        message.innerHTML = 'You searched for: ' + searchValue;
+        const srchval = search;
 
-        const searchkey = searchValue;
         axios.get("http://localhost:8070/employee/").then(res => {
             if(res.data.success){
-                filterData(res.data.existingEmployees, searchkey)
+                filterData(res.data.existingEmployees, srchval)
             }
         });
     }
@@ -47,11 +48,11 @@ export default function AllEmployees(){
     return (
         <div>
             <div className="row g-3" style={{marginTop : 50}}>
-                <input className="form-control" id = "search" type="search" placeholder="Search" aria-label="Search" style={{width : 500, marginInline : 200}}></input>
+                <input className="form-control" id = "search" type="search" placeholder="Search" onChange={handleChange} aria-label="Search" style={{width : 500, marginInline : 200}}></input>
                 <button className="btn btn-outline-success my-2 my-sm-0 mb-3" type="submit" onClick = {handleSearchArea}>Search</button>
             </div>
             <br/>        
-            <h1 id = "message"></h1>
+            <h1 id = "message">You searched for: {search}</h1>
             <table className="table table-hover table-bordered" style={{marginBlock : 50}}>
                 <thead>
                     <tr>
