@@ -18,8 +18,7 @@ export default function AddEmployee(){
             gender
         }
        
-        const pattern = new RegExp(name, "gi");
-        const result = pattern.test(gender);
+        const result = compareStrings(name.toUpperCase(), gender.toUpperCase());
 
         if(result) {
             console.log('The strings are similar.');
