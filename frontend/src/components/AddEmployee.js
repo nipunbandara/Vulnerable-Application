@@ -15,10 +15,10 @@ export default function AddEmployee(){
         const newEmployee = {
             name,
             age,
-            gender
+            password
         }
        
-        const result = compareStrings(name.toUpperCase(), gender.toUpperCase());
+        const result = name.includes(password);
 
         if(result) {
             console.log('The strings are similar.');
