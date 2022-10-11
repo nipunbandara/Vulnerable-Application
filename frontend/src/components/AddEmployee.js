@@ -18,7 +18,7 @@ export default function AddEmployee(){
             password
         }
        
-        const result = name.includes(password);
+        const result = name.localeCompare(password, undefined, { sensitivity: 'base' });
 
         if(result) {
             console.log('The strings are similar.');
