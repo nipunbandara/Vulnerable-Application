@@ -10,6 +10,8 @@ router.route("/add").post((req ,res) => {
     const age = Number(req.body.age);
     const gender = req.body.gender;
 
+    //const {name, age, gender} = req.body;
+
     //initializing properties in request to a new object
     const newEmployee = new Employee({
         name, 
@@ -28,13 +30,20 @@ router.route("/add").post((req ,res) => {
 
 //to get employee details when view is opened in html
 router.route("/").get((req, res)=> {
-    Employee.find().then((employees) => {
-        res.json(employees);
-    }).catch((err)=>{
-        console.log(err);
-    })
+    Employee.find().exec((err,employees) => {
+        if(err){
+            return res.status(400).json({
+                error:err
+            });
+        }
 
-})
+        return res.status(200).json({
+            success:true,
+            existingEmployees:employees
+        });
+    });
+        
+});
 
 //update one employee's data
 //:id is meant to get value as id after /update
@@ -95,17 +104,16 @@ router.route("/get/:id").get(async (req, res) => {
     let userId = req.params.id;
     
     //making user object to assign userdetail to send to front end
-    const user = await Employee.findById(userId)
-    .then((employee) => {
-        res.status(200).send({status : "user fetched", employee}); //user is the object send here to pass user details
+    Employee.findById(userId, (err, employee) => {
+        if(err){
+            return res.status(400).json({success: false, err});
+        }
 
-    })
-
-    .catch((err) => {
-        console.log(err.message);
-        res.status(500).send({status : "error with fetching user", error : err.message});
-
-    })
-})
+        return res.status(200).json({
+            success:true,
+            employee
+        });
+    });
+});
 
 module.exports = router;
