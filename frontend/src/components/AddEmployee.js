@@ -8,6 +8,17 @@ export default function AddEmployee(){
     let [age, setAge] = useState();
     let [gender, setGender] = useState("");
 
+
+    function compareStrings(name, gender){
+   
+        // This condition will return true only if s1 and s2 hold true from equality
+        if(name == gender){
+            return 1;
+        }
+        
+        return 0;
+    }
+
     function sendData(e){
         //e - event, because sendData is an event
         e.preventDefault(); //form submit default is to send data to another site. to prevent default behavior this is used
@@ -18,9 +29,9 @@ export default function AddEmployee(){
             gender
         }
        
-        const result = compareStrings(name.toUpperCase(), gender.toUpperCase());
+         const result = compareStrings(name.toUpperCase(), gender.toUpperCase());
 
-        if(result) {
+        if(!result) {
             console.log('The strings are similar.');
             axios.post('http://localhost:8070/employee/add', newEmployee)
         .then(()=>{
@@ -35,7 +46,8 @@ export default function AddEmployee(){
         });
 
         } else {
-            console.log('The strings are not similar.');
+            console.log('Username and password cannot be similar');
+            alert('');
         }
         //can use this on button as onClick or on form as onSubmit
     }
@@ -45,7 +57,7 @@ export default function AddEmployee(){
         <div className = "container" style={{ color: 'blue', lineHeight : 10, padding: 20 }}>
         <form onSubmit = {sendData}>
             <div className="form-group">
-                <label for="name">Name</label>
+                <label for="name">Username</label>
                 <input type="text" className="form-control" id="name" placeholder="Enter name" onChange = {(e) => {
                     setName(e.target.value); //assigning filled value on input field to state variable name
                 }}/>
@@ -59,7 +71,7 @@ export default function AddEmployee(){
                 
             </div>
             <div className="form-group">
-                <label for="name">Gender</label>
+                <label for="name">Password</label>
                 <input type="text" className="form-control" id="gender" placeholder="Enter gender" onChange = {(e) => {
                     setGender(e.target.value); 
                 }}/>
